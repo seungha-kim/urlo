@@ -1,3 +1,5 @@
+env.list
+
 # sqlite3
 *.db
 

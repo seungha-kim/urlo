@@ -12,7 +12,7 @@ import hug
 
 ACCESS_KEY = os.environ['URLO_ACCESS_KEY']
 
-conn = sqlite3.connect('urlo.db')
+conn = sqlite3.connect('data/urlo.db')
 cur = conn.cursor()
 cur.execute('''
 create table if not exists urlo (

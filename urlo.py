@@ -42,7 +42,7 @@ def redirect(u):
 @hug.cli()
 def create(url, access_key, response):
     if access_key != ACCESS_KEY:
-        raise falcon.HTTPBadRequest('Unauthorized', 'No access_key given')
+        raise falcon.HTTPUnauthorized('Unauthorized', 'access_key does not match', 'access_key')
     while True:
         c = conn.cursor()
         ident = uuid.uuid4().hex[:6]
@@ -63,3 +63,12 @@ def create(url, access_key, response):
         'ok': True,
         'id': ident
     }
+
+@hug.get('/auth')
+def auth(access_key):
+    if access_key == ACCESS_KEY:
+        return {
+            'ok': True
+        }
+    else:
+        raise falcon.HTTPUnauthorized('Unauthorized', 'access_key does not match', 'access_key')
